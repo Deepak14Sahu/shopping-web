@@ -5,9 +5,10 @@ function CarouselWeb() {
     <Carousel data-bs-theme="dark">
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-block w-100 "
           src="./Static/image1.jpg"
           alt="First slide"
+          style={{ height: "580px" }}
         />
         <Carousel.Caption>
           <h5>First slide label</h5>
@@ -16,9 +17,10 @@ function CarouselWeb() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-block w-100 "
           src="./Static/image2.jpg"
           alt="Second slide"
+          style={{ height: "580px" }}
         />
         <Carousel.Caption>
           <h5>Second slide label</h5>
@@ -27,9 +29,10 @@ function CarouselWeb() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-block w-100 "
           src="./Static/image3.jpg"
           alt="Third slide"
+          style={{ height: "580px" }}
         />
         <Carousel.Caption>
           <h5>Third slide label</h5>

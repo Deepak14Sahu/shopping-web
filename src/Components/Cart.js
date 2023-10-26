@@ -9,12 +9,12 @@ function Cart() {
   if (products.length === 0) {
     return (
       <>
-        <h3 className="display-5 mb-2 text-center">Shopping Cart</h3>
+        <h3 className="display-5 my-2 text-center">Shopping Cart</h3>
         <p className="mb-5 text-center">
           <i className="text-info font-weight-bold">{products.length} </i>
           items in your cart
         </p>
-        <p className="h4 text-center " style={{ marginTop: "12%" }}>
+        <p className="h4 text-center " style={{ margin: "6.7%" }}>
           Cart is empty!! Add something
         </p>
       </>
@@ -55,7 +55,7 @@ function Cart() {
                         <div className="row">
                           <div className="col-md-3 text-left">
                             <img
-                              src={product.image}
+                              src={product.images[0]}
                               alt=""
                               className="img-fluid d-none d-md-block rounded mb-2 shadow "
                             />

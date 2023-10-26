@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import { removeWishlist } from "../Redux/ProductSlice";
 
 function Wishlist() {
-  const products = useSelector((state) => state.product.wishlist);
+  const { wishlist } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const handleClick = (id) => {
     dispatch(removeWishlist(id));
   };
-  if (products.length === 0) {
+  if (wishlist.length === 0) {
     return (
       <>
-        <p className="h1 text-center"> Your Wishlist</p>
-        <p className="h4 text-center " style={{ marginTop: "15%" }}>
+        <p className="h1 text-center my-3"> Your Wishlist</p>
+        <p className="h4 text-center " style={{ margin: "8%" }}>
           Nothing in the wishlist
         </p>
       </>
@@ -22,11 +22,11 @@ function Wishlist() {
     <>
       <div className="container" style={{ marginTop: "20px" }}>
         <div className="row">
-          {products.map((product) => (
+          {wishlist.map((product) => (
             <div className="col-md-3 my-3" key={product.id}>
               <div className="card-sl">
                 <div className="card-image ">
-                  <img src={product.image} alt="Product" />
+                  <img src={product.images[0]} alt="Product" />
                 </div>
 
                 <div className="card-heading">{product.name}</div>

@@ -9,13 +9,13 @@ const ProductSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      state.cart.push(action.payload);
+      const res = state.cart.find((item) => item.id === action.payload.id);
+      if (!res) {
+        state.cart.push(action.payload);
+      } else alert("Item already in Cart");
     },
     addToWishlist(state, action) {
-      const res = state.wishlist.find((item) => item.id === action.payload.id);
-      if (!res) {
-        state.wishlist.push(action.payload);
-      } else alert("Item already in Wishlist");
+      state.wishlist.push(action.payload);
     },
     removeWishlist(state, action) {
       state.wishlist = state.wishlist.filter(

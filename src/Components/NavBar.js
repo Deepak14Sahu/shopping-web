@@ -1,8 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import "../CSS/NavBar.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NavBar() {
@@ -10,42 +9,42 @@ function NavBar() {
   const wishlistLength = useSelector((state) => state.product.wishlist.length);
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary mb-2">
+    <Navbar expand="lg" style={{ background: "#5a5a5a" }}>
       <Container fluid>
-        <Link to="/" className="text-decoration-none">
-          <Navbar.Brand>Mart</Navbar.Brand>
-        </Link>
+        <img src="./Static/logo.png" style={{ width: "6%" }} alt="" />
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            style={{ maxHeight: "100px", fontSize: "18px" }}
             navbarScroll
           >
-            <Nav.Link>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `text-decoration-none ${
-                    isActive ? "text-primary" : "text-dark"
-                  } `
-                }
-              >
-                Home
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink
-                to="/products"
-                className={({ isActive }) =>
-                  `text-decoration-none ${
-                    isActive ? "text-primary" : "text-dark"
-                  } `
-                }
-              >
-                Products
-              </NavLink>
-            </Nav.Link>
+            <NavLink
+              to="/"
+              className="nav-link"
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "orange" : "beige",
+                };
+              }}
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/products"
+              className="nav-link"
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "orange" : "beige",
+                };
+              }}
+            >
+              Products
+            </NavLink>
           </Nav>
           <Nav className=" my-2 my-lg-0 ">
             <NavLink to="/wishlist" className="mx-3">
