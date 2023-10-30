@@ -29,7 +29,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" style={{ background: "#5a5a5a" }}>
+    <Navbar sticky="top" expand="lg" style={{ background: "#5a5a5a" }}>
       <Container fluid>
         <img src={logo} style={{ width: "6%" }} alt="" />
 
