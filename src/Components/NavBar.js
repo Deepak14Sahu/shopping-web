@@ -88,7 +88,7 @@ function NavBar() {
               </NavLink>
               <Nav className="mx-3">
                 <i className="fa fa-user fa-2x" style={{ color: "black" }}></i>
-                <NavDropdown menuVariant="dark" align="end" style={{}}>
+                <NavDropdown menuVariant="dark" align="end">
                   <NavLink
                     className="text-decoration-none"
                     style={{ color: "beige", margin: "32%" }}

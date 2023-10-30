@@ -2,21 +2,19 @@ import { useLocation } from "react-router-dom";
 import "../CSS/ProductPage.css";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-
 import { AddWishlistClick, AddCartClick } from "./AddingFunction";
 import { useState } from "react";
 
 export default function ProductPage() {
-  const location = useLocation();
-  const data = location.state;
+  const { state: data } = useLocation();
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
-
   const wishlist = useSelector((state) => state.product.wishlist);
+  const color = handleColor();
 
-  const handleColor = () => {
+  function handleColor() {
     return wishlist.some((item) => item.id === data.id) ? "red" : "#5a5a5a";
-  };
+  }
 
   return (
     <Card className="m-auto mt-3">
@@ -55,7 +53,7 @@ export default function ProductPage() {
             className="fa fa-heart fa-2x"
             aria-hidden="true"
             onClick={() => AddWishlistClick(wishlist, dispatch, data)}
-            style={{ color: handleColor() }}
+            style={{ color: color }}
           ></i>
         </Col>
       </Row>
