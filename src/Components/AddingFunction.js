@@ -5,7 +5,7 @@ import {
 } from "../Redux/ProductSlice";
 
 const AddCartClick = (dispatch, data) => {
-  dispatch(addToCart(data));
+  dispatch(addToCart({ ...data, quantity: 1 }));
 };
 
 const AddWishlistClick = (wishlist, dispatch, data) => {

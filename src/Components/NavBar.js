@@ -11,6 +11,10 @@ import { useEffect } from "react";
 function NavBar() {
   const { cart, wishlist, loggedIn } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+  const cartQuantity = cart.reduce(
+    (cartQuantity, product) => cartQuantity + product.quantity,
+    0
+  );
 
   useEffect(() => {
     if (localStorage.getItem("logging") === "true") {
@@ -79,7 +83,7 @@ function NavBar() {
                 ></i>
 
                 <span className="position-absolute translate-middle badge rounded-pill bg-danger">
-                  {cart.length}
+                  {cartQuantity}
                 </span>
               </NavLink>
               <Nav className="mx-3">

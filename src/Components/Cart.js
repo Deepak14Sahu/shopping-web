@@ -1,31 +1,93 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { removeCart } from "../Redux/ProductSlice";
+import { removeCart, updateCartQuantity } from "../Redux/ProductSlice";
+import { useMemo } from "react";
 
-function Cart() {
+function CartItem({ product }) {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.cart);
   const navigate = useNavigate();
 
-  if (products.length === 0) {
-    return (
-      <>
-        <h3 className="display-5 my-2 text-center">Shopping Cart</h3>
-        <p className="mb-5 text-center">
-          <i className="text-info font-weight-bold">{products.length} </i>
-          items in your cart
-        </p>
-        <p className="h4 text-center " style={{ margin: "6.7%" }}>
-          Cart is empty!! Add something
-        </p>
-      </>
-    );
-  }
-  const total = products.reduce((total, product) => total + product.price, 0);
-  const handleDelete = (id) => {
-    dispatch(removeCart(id));
+  const handleDelete = () => {
+    dispatch(removeCart(product.id));
   };
+  const handleQuantityChange = (e, productId) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    newQuantity <= 0
+      ? dispatch(removeCart(product.id))
+      : dispatch(updateCartQuantity({ id: productId, quantity: newQuantity }));
+  };
+
   return (
+    <tr>
+      <td data-th="Product">
+        <div className="row">
+          <div className="col-md-3 text-left">
+            <img
+              src={product.images[0]}
+              alt=""
+              className="img-fluid d-none d-md-block rounded mb-2 shadow"
+              onClick={() =>
+                navigate(`../products/${product.id}`, { state: product })
+              }
+            />
+          </div>
+          <div className="col-md-9 text-left mt-sm-2">
+            <h4>{product.name}</h4>
+            <p className="font-weight-light">
+              {product.description.slice(0, 100)}...
+            </p>
+          </div>
+        </div>
+      </td>
+      <td data-th="Price">&#8377; {product.price}</td>
+      <td data-th="Quantity">
+        <input
+          type="number"
+          className="form-control form-control-lg text-center"
+          value={product.quantity || 1}
+          onChange={(e) => handleQuantityChange(e, product.id)}
+        />
+      </td>
+      <td className="actions" data-th="" style={{ textAlign: "center" }}>
+        <div className="text-right">
+          <button
+            className="btn btn-white border-secondary bg-white btn-md mb-2"
+            onClick={handleDelete}
+          >
+            <i className="fa fa-trash" style={{ color: "red" }}></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+function Cart() {
+  const products = useSelector((state) => state.product.cart);
+  const cartQuantity = products.reduce(
+    (cartQuantity, product) => cartQuantity + product.quantity,
+    0
+  );
+
+  const total = useMemo(() => {
+    return products.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+  }, [products]);
+
+  return products.length === 0 ? (
+    <>
+      <h3 className="display-5 my-2 text-center">Shopping Cart</h3>
+      <p className="mb-5 text-center">
+        <i className="text-info font-weight-bold">{products.length} </i>
+        items in your cart
+      </p>
+      <p className="h4 text-center " style={{ margin: "6.7%" }}>
+        Cart is empty!! Add something
+      </p>
+    </>
+  ) : (
     <>
       <section className="pt-5 pb-5">
         <div className="container">
@@ -33,7 +95,7 @@ function Cart() {
             <div className="col-lg-12 col-md-12 col-12">
               <h3 className="display-5 mb-2 text-center">Shopping Cart</h3>
               <p className="mb-5 text-center">
-                <i className="text-info font-weight-bold">{products.length} </i>
+                <i className="text-info font-weight-bold">{cartQuantity} </i>
                 items in your cart
               </p>
 
@@ -44,58 +106,14 @@ function Cart() {
                 <thead>
                   <tr>
                     <th style={{ width: "60%" }}>Product</th>
-                    <th style={{ width: "12%" }}>Price</th>
-                    {/* <th style={{ width: "10%" }}>Quantity</th> */}
+                    <th style={{ width: "12%" }}>Price/unit</th>
+                    <th style={{ width: "10%" }}>Quantity</th>
                     <th style={{ width: "16%" }}></th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr key={product.id}>
-                      <td data-th="Product">
-                        <div className="row">
-                          <div className="col-md-3 text-left">
-                            <img
-                              src={product.images[0]}
-                              alt=""
-                              className="img-fluid d-none d-md-block rounded mb-2 shadow "
-                              onClick={() =>
-                                navigate(`../products/${product.id}`, {
-                                  state: product,
-                                })
-                              }
-                            />
-                          </div>
-                          <div className="col-md-9 text-left mt-sm-2">
-                            <h4>{product.name}</h4>
-                            <p className="font-weight-light">
-                              {product.description.slice(0, 100)}...
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td data-th="Price">&#8377; {product.price}</td>
-                      {/* <td data-th="Quantity">
-                        <input
-                          type="number"
-                          className="form-control form-control-lg text-center"
-                          value="1"
-                        />
-                      </td> */}
-                      <td className="actions" data-th="">
-                        <div className="text-right">
-                          <button
-                            className="btn btn-white border-secondary bg-white btn-md mb-2"
-                            onClick={() => handleDelete(product.id)}
-                          >
-                            <i
-                              className="fa fa-trash"
-                              style={{ color: "red" }}
-                            ></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                    <CartItem key={product.id} product={product} />
                   ))}
                 </tbody>
               </table>

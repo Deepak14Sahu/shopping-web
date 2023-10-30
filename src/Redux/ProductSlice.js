@@ -10,10 +10,16 @@ const ProductSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      const res = state.cart.find((item) => item.id === action.payload.id);
-      if (!res) {
-        state.cart.push(action.payload);
-      } else alert("Item already in Cart");
+      const { id, quantity } = action.payload;
+      const existingProduct = state.cart.find((item) => item.id === id);
+      if (!existingProduct) {
+        state.cart.push({ ...action.payload, quantity });
+      } else existingProduct.quantity += quantity;
+    },
+    updateCartQuantity(state, action) {
+      const { id, quantity } = action.payload;
+      const existingProduct = state.cart.find((item) => item.id === id);
+      existingProduct.quantity = quantity;
     },
     addToWishlist(state, action) {
       state.wishlist.push(action.payload);
@@ -38,5 +44,6 @@ export const {
   removeWishlist,
   removeCart,
   toggleLog,
+  updateCartQuantity,
 } = ProductSlice.actions;
 export default ProductSlice.reducer;
