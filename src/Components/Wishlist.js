@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeWishlist } from "../Redux/ProductSlice";
 
 function Wishlist() {
   const { wishlist } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (id) => {
     dispatch(removeWishlist(id));
   };
@@ -26,7 +27,13 @@ function Wishlist() {
             <div className="col-md-3 my-3" key={product.id}>
               <div className="card-sl">
                 <div className="card-image ">
-                  <img src={product.images[0]} alt="Product" />
+                  <img
+                    src={product.images[0]}
+                    alt="Product"
+                    onClick={() =>
+                      navigate(`../products/${product.id}`, { state: product })
+                    }
+                  />
                 </div>
 
                 <div className="card-heading">{product.name}</div>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cart: [],
   wishlist: [],
+  loggedIn: false,
 };
 const ProductSlice = createSlice({
   name: "product",
@@ -25,9 +26,17 @@ const ProductSlice = createSlice({
     removeCart(state, action) {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
+    toggleLog(state, action) {
+      state.loggedIn = action.payload;
+    },
   },
 });
 
-export const { addToCart, addToWishlist, removeWishlist, removeCart } =
-  ProductSlice.actions;
+export const {
+  addToCart,
+  addToWishlist,
+  removeWishlist,
+  removeCart,
+  toggleLog,
+} = ProductSlice.actions;
 export default ProductSlice.reducer;

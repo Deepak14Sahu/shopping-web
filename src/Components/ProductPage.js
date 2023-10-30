@@ -4,11 +4,13 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AddWishlistClick, AddCartClick } from "./AddingFunction";
+import { useState } from "react";
 
 export default function ProductPage() {
   const location = useLocation();
   const data = location.state;
   const dispatch = useDispatch();
+  const [index, setIndex] = useState(0);
 
   const wishlist = useSelector((state) => state.product.wishlist);
 
@@ -25,11 +27,12 @@ export default function ProductPage() {
               style={{ height: "fit-content", width: "100%", padding: "1%" }}
               src={image}
               key={index}
+              onClick={() => setIndex(index)}
             />
           ))}
         </Col>
         <Col xs={4}>
-          <Card.Img src={data.images[0]} />
+          <Card.Img src={data.images[index]} />
         </Col>
         <Col xs={6}>
           <Card.Body>

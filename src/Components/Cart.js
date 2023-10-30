@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeCart } from "../Redux/ProductSlice";
 
 function Cart() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.cart);
+  const navigate = useNavigate();
 
   if (products.length === 0) {
     return (
@@ -58,6 +59,11 @@ function Cart() {
                               src={product.images[0]}
                               alt=""
                               className="img-fluid d-none d-md-block rounded mb-2 shadow "
+                              onClick={() =>
+                                navigate(`../products/${product.id}`, {
+                                  state: product,
+                                })
+                              }
                             />
                           </div>
                           <div className="col-md-9 text-left mt-sm-2">

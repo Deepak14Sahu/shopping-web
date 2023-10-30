@@ -166,4 +166,15 @@ const products = [
   },
 ];
 
-export default products;
+const users = [
+  {
+    id: 1,
+    name: "Deepak Sahu",
+    email: "dsahu3454@gmail.com",
+    password: "deepak",
+    mobile: 9876543210,
+    address: "Bhavarkuan",
+  },
+];
+
+export { products, users };
