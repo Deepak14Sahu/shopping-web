@@ -137,7 +137,7 @@ const products = [
   {
     id: 10,
     name: "A Frog",
-    price: "Free",
+    price: 100,
     description:
       "In general, frogs have protruding eyes, no tail, and strong, webbed hind feet that are adapted for leaping and swimming. They also possess smooth, moist skins. Many are predominantly aquatic, but some live on land, in burrows, or in trees.",
     shippingDetails: "Free Shipping",
