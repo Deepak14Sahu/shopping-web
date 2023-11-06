@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/shopping-web/static/css/main.c89b572e.css",
-    "main.js": "/shopping-web/static/js/main.7097a313.js",
+    "main.js": "/shopping-web/static/js/main.e43de873.js",
     "static/js/787.253ae3cd.chunk.js": "/shopping-web/static/js/787.253ae3cd.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/shopping-web/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/shopping-web/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -11,11 +11,11 @@
     "static/media/logo.png": "/shopping-web/static/media/logo.280e02f0a3ded2257a5b.png",
     "index.html": "/shopping-web/index.html",
     "main.c89b572e.css.map": "/shopping-web/static/css/main.c89b572e.css.map",
-    "main.7097a313.js.map": "/shopping-web/static/js/main.7097a313.js.map",
+    "main.e43de873.js.map": "/shopping-web/static/js/main.e43de873.js.map",
     "787.253ae3cd.chunk.js.map": "/shopping-web/static/js/787.253ae3cd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c89b572e.css",
-    "static/js/main.7097a313.js"
+    "static/js/main.e43de873.js"
   ]
 }
